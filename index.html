@@ -1,650 +1,468 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Habitare — Diseño de interiores</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitare · Diseño de Interiores</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --h-dark: #3D4F3C;
+            --h-sage: #A8C4A6;
+            --h-linen: #E8E4DC;
+            --h-cream: #F7F5F1;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Jost', sans-serif; font-weight: 300; color: var(--h-dark); background: var(--h-cream); line-height: 1.6; }
+        
+        nav {
+            background: var(--h-dark);
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo-wrap { display: flex; align-items: center; gap: 12px; }
+        .logo-name { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 28px; color: var(--h-linen); letter-spacing: 0.05em; }
+        .logo-tag { font-family: 'Jost', sans-serif; font-weight: 200; font-size: 7.5px; letter-spacing: 0.28em; color: var(--h-sage); margin-top: 1px; text-transform: uppercase; }
+        .nav-cta {
+            background: none;
+            border: 1px solid var(--h-sage);
+            color: var(--h-sage);
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 12px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 10px 22px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .nav-cta:hover { background: rgba(168,196,166,0.1); }
 
-    :root {
-      --verde:   #3D4F3C;
-      --sage:    #A8C4A6;
-      --linen:   #E8E4DC;
-      --cream:   #F7F5F1;
-      --footer:  #2a3729;
-    }
+        .hero {
+            background: var(--h-dark);
+            padding: 80px 40px 72px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 52px;
+            color: var(--h-linen);
+            line-height: 1.15;
+            letter-spacing: 0.02em;
+            max-width: 640px;
+            margin: 0 auto 20px;
+        }
+        .hero h1 em { font-style: italic; color: var(--h-sage); }
+        .hero p {
+            font-size: 15px;
+            color: var(--h-sage);
+            letter-spacing: 0.08em;
+            font-weight: 200;
+            max-width: 480px;
+            margin: 0 auto 36px;
+            line-height: 1.8;
+        }
+        .btn-primary {
+            display: inline-block;
+            background: var(--h-sage);
+            color: var(--h-dark);
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 16px 36px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .btn-primary:hover { opacity: 0.88; }
 
-    html { scroll-behavior: smooth; }
+        .section { padding: 64px 40px; max-width: 1200px; margin: 0 auto; }
+        .section-label {
+            font-size: 9px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--h-sage);
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+        .section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 36px;
+            color: var(--h-dark);
+            margin-bottom: 32px;
+            line-height: 1.2;
+        }
 
-    body {
-      font-family: 'Jost', sans-serif;
-      font-weight: 300;
-      background: var(--linen);
-      color: var(--verde);
-      line-height: 1.5;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
+        .how-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2px;
+            margin-top: 40px;
+        }
+        .how-item {
+            background: var(--h-linen);
+            padding: 32px 24px;
+        }
+        .how-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 300;
+            color: var(--h-sage);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .how-item h3 {
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 400;
+            color: var(--h-dark);
+            margin-bottom: 8px;
+        }
+        .how-item p {
+            font-size: 13px;
+            color: #5a6e59;
+            line-height: 1.7;
+            font-weight: 300;
+        }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.72s ease, transform 0.72s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
+        .portfolio-section {
+            background: var(--h-linen);
+            padding: 64px 0;
+        }
+        .portfolio-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        .case-block { margin-bottom: 56px; }
+        .case-block:last-child { margin-bottom: 0; }
+        .case-label {
+            font-size: 9px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--h-sage);
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+        .ba-item { position: relative; overflow: hidden; }
+        .ba-item img { width: 100%; height: 260px; object-fit: cover; display: block; }
+        .ba-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--h-dark);
+            color: var(--h-linen);
+            font-size: 9px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            font-weight: 400;
+        }
+        .case-desc {
+            margin-top: 14px;
+            color: #5a6e59;
+            line-height: 1.7;
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-weight: 300;
+        }
 
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      font-family: 'Jost', sans-serif;
-      cursor: pointer;
-      border: none;
-      transition: opacity 0.2s, background 0.2s;
-      line-height: 1;
-    }
-    .btn:hover { opacity: 0.8; }
+        .services-section {
+            padding: 64px 0;
+            background: var(--h-cream);
+        }
+        .services-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2px;
+            margin-top: 36px;
+        }
+        .service-card {
+            background: var(--h-linen);
+            padding: 32px 24px;
+            border-top: 2px solid var(--h-sage);
+        }
+        .service-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-weight: 300;
+            color: var(--h-dark);
+            margin-bottom: 8px;
+        }
+        .service-price {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--h-dark);
+            margin-bottom: 12px;
+        }
+        .service-price span { font-size: 12px; font-weight: 300; color: #5a6e59; }
+        .service-card p {
+            font-size: 13px;
+            color: #5a6e59;
+            line-height: 1.7;
+            font-weight: 300;
+        }
 
-    .btn-ghost {
-      color: var(--cream);
-      border: 1px solid rgba(168, 196, 166, 0.5);
-      padding: 0.55rem 1.4rem;
-      font-size: 0.78rem;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      background: transparent;
-    }
-    .btn-ghost:hover {
-      opacity: 1;
-      border-color: var(--sage);
-      background: rgba(168, 196, 166, 0.08);
-    }
+        .cta-section {
+            background: var(--h-dark);
+            padding: 72px 40px;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 40px;
+            color: var(--h-linen);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .cta-section p {
+            color: var(--h-sage);
+            font-size: 14px;
+            letter-spacing: 0.08em;
+            font-weight: 200;
+            margin-bottom: 36px;
+        }
 
-    .btn-sage {
-      background: var(--sage);
-      color: var(--verde);
-      padding: 0.8rem 2.2rem;
-      font-size: 0.83rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-    }
+        footer {
+            background: #2a3729;
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        footer p { font-size: 11px; color: var(--h-sage); letter-spacing: 0.1em; font-weight: 200; }
 
-    .btn-sage-lg {
-      background: var(--sage);
-      color: var(--verde);
-      padding: 1rem 2.8rem;
-      font-size: 0.88rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-    }
-
-    .eyebrow {
-      font-family: 'Jost', sans-serif;
-      font-weight: 200;
-      font-size: 8px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--sage);
-      display: block;
-      margin-bottom: 1rem;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(1.9rem, 4vw, 3rem);
-      color: var(--verde);
-      line-height: 1.15;
-    }
-
-    nav {
-      background: var(--verde);
-      padding: 1.25rem 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .logo {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      text-decoration: none;
-    }
-
-    .logo-row {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-    }
-
-    .logo-wordmark {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 1.55rem;
-      color: var(--cream);
-      letter-spacing: 0.015em;
-      line-height: 1;
-    }
-
-    .logo-sub {
-      font-family: 'Jost', sans-serif;
-      font-weight: 200;
-      font-size: 8px;
-      letter-spacing: 0.28em;
-      color: var(--sage);
-      text-transform: uppercase;
-    }
-
-    #hero {
-      background: var(--verde);
-      padding: 7rem 2rem 6rem;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.75rem;
-    }
-
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(2.4rem, 6vw, 4.8rem);
-      color: var(--cream);
-      line-height: 1.12;
-      max-width: 820px;
-    }
-
-    .hero-sub {
-      font-family: 'Jost', sans-serif;
-      font-weight: 200;
-      font-size: clamp(0.88rem, 2vw, 1.05rem);
-      color: var(--sage);
-      max-width: 480px;
-      line-height: 1.85;
-    }
-
-    #como-funciona {
-      background: var(--cream);
-      padding: 5.5rem 2rem;
-    }
-
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3rem 5rem;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .step {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .step-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 48px;
-      color: var(--sage);
-      line-height: 1;
-      margin-bottom: 0.2rem;
-    }
-
-    .step-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 1.2rem;
-      color: var(--verde);
-    }
-
-    .step-desc {
-      font-size: 0.83rem;
-      font-weight: 300;
-      color: #7a7a72;
-      line-height: 1.75;
-    }
-
-    #proyectos {
-      background: var(--linen);
-      padding: 5.5rem 2rem;
-    }
-
-    .projects-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 4rem;
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-
-    .project-case {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-
-    .project-images {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-    }
-
-    .project-img-wrap {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-placeholder {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.7rem;
-    }
-
-    .ph-before { background: #ccc8c0; }
-    .ph-after  { background: #b2bfb0; }
-
-    .ph-icon { opacity: 0.38; }
-
-    .ph-label {
-      font-family: 'Jost', sans-serif;
-      font-weight: 200;
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--verde);
-      opacity: 0.5;
-    }
-
-    .img-badge {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      padding: 0.45rem 0.9rem;
-      background: rgba(61, 79, 60, 0.68);
-      backdrop-filter: blur(3px);
-      font-family: 'Jost', sans-serif;
-      font-weight: 200;
-      font-size: 8px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--cream);
-    }
-
-    .project-meta { padding-top: 0.15rem; }
-
-    .project-tag {
-      font-family: 'Jost', sans-serif;
-      font-weight: 200;
-      font-size: 8px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--sage);
-      display: block;
-      margin-bottom: 0.4rem;
-    }
-
-    .project-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 1.15rem;
-      color: var(--verde);
-    }
-
-    #servicios {
-      background: var(--cream);
-      padding: 5.5rem 2rem;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      max-width: 860px;
-      margin: 0 auto;
-      background: var(--linen);
-    }
-
-    .service-card {
-      background: var(--cream);
-      border-top: 2px solid var(--sage);
-      padding: 2.25rem 2rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-    }
-
-    .service-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 1.2rem;
-      color: var(--verde);
-    }
-
-    .service-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 2.2rem;
-      color: var(--verde);
-      line-height: 1.1;
-      margin: 0.35rem 0 0.6rem;
-    }
-
-    .service-desc {
-      font-size: 0.8rem;
-      font-weight: 300;
-      color: #888880;
-      line-height: 1.75;
-    }
-
-    #cta-final {
-      background: var(--verde);
-      padding: 7rem 2rem;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .cta-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(2.2rem, 5.5vw, 4rem);
-      color: var(--cream);
-      line-height: 1.1;
-    }
-
-    .cta-sub {
-      font-weight: 200;
-      font-size: 0.9rem;
-      color: var(--sage);
-      max-width: 380px;
-      line-height: 1.85;
-    }
-
-    footer {
-      background: var(--footer);
-      padding: 3rem 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.1rem;
-      text-align: center;
-    }
-
-    .footer-logo-row {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .footer-wordmark {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 1.1rem;
-      color: var(--sage);
-      letter-spacing: 0.015em;
-    }
-
-    .footer-copy {
-      font-size: 0.74rem;
-      font-weight: 200;
-      color: var(--sage);
-      letter-spacing: 0.05em;
-      opacity: 0.65;
-    }
-
-    footer a {
-      color: var(--sage);
-      text-decoration: none;
-      opacity: 1;
-    }
-    footer a:hover { opacity: 0.75; }
-
-    @media (max-width: 640px) {
-      nav { padding: 1rem 1.25rem; }
-      #hero { padding: 4.5rem 1.25rem 4rem; }
-      #como-funciona,
-      #proyectos,
-      #servicios,
-      #cta-final { padding: 4rem 1.25rem; }
-
-      .steps-grid { grid-template-columns: 1fr; gap: 2.75rem; }
-      .project-images { grid-template-columns: 1fr; }
-      .services-grid { grid-template-columns: 1fr; }
-      footer { padding: 2.5rem 1.25rem; }
-    }
-
-    @media (min-width: 900px) {
-      .steps-grid { gap: 3.5rem 6rem; }
-    }
-  </style>
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { padding: 12px 20px; }
+            .logo-name { font-size: 22px; }
+            .hero { padding: 60px 20px 50px; }
+            .hero h1 { font-size: 38px; }
+            .section { padding: 48px 20px; }
+            .portfolio-content, .services-content { padding: 0 20px; }
+            .how-grid { grid-template-columns: 1fr; }
+            .before-after { grid-template-columns: 1fr; gap: 12px; }
+            .services-grid { grid-template-columns: 1fr; }
+            footer { flex-direction: column; gap: 8px; padding: 20px; }
+        }
+    </style>
 </head>
 <body>
-
-  <nav>
-    <a href="#hero" class="logo">
-      <div class="logo-row">
-        <svg width="22" height="28" viewBox="0 0 26 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="0.5" y="13" width="2.8" height="19" fill="#A8C4A6"/>
-          <rect x="22.7" y="13" width="2.8" height="19" fill="#A8C4A6"/>
-          <polyline points="0,14 13,1.5 26,14" stroke="#A8C4A6" stroke-width="2.2" fill="none" stroke-linejoin="miter" stroke-linecap="square"/>
-        </svg>
-        <span class="logo-wordmark">abitare</span>
-      </div>
-      <span class="logo-sub">Diseño de interiores</span>
-    </a>
-    <a class="btn btn-ghost" href="https://wa.me/34642779763?text=Hola%20Ver%C3%B3nica%2C%20me%20gustar%C3%ADa%20que%20me%20ayudes%20con%20mi%20espacio" target="_blank" rel="noopener">Hablemos</a>
-  </nav>
-
-  <section id="hero">
-    <h1 class="hero-title reveal">Tu espacio, reimaginado<br>antes de mover nada</h1>
-    <p class="hero-sub reveal" style="transition-delay:.12s">Visualiza tu hogar transformado con renders y dirección de estilo, antes de comprar una sola pieza.</p>
-    <a class="btn btn-sage reveal" style="transition-delay:.22s" href="https://wa.me/34642779763?text=Hola%20Ver%C3%B3nica%2C%20me%20gustar%C3%ADa%20que%20me%20ayudes%20con%20mi%20espacio" target="_blank" rel="noopener">Empieza aquí</a>
-  </section>
-
-  <section id="como-funciona">
-    <div class="section-header reveal">
-      <span class="eyebrow">El proceso</span>
-      <h2 class="section-title">Cómo funciona</h2>
-    </div>
-    <div class="steps-grid">
-      <div class="step reveal">
-        <span class="step-number">01</span>
-        <h3 class="step-title">Cuéntame tu espacio</h3>
-        <p class="step-desc">Me envías fotos y medidas. Hablamos de tu forma de vivir, lo que no funciona y lo que imaginas.</p>
-      </div>
-      <div class="step reveal" style="transition-delay:.08s">
-        <span class="step-number">02</span>
-        <h3 class="step-title">Dirección de estilo</h3>
-        <p class="step-desc">Definimos una paleta, materiales y referencias que encajan con tu vida, no solo con tendencias.</p>
-      </div>
-      <div class="step reveal" style="transition-delay:.16s">
-        <span class="step-number">03</span>
-        <h3 class="step-title">Lo ves antes de comprar</h3>
-        <p class="step-desc">Recibes renders fotorrealistas de tu espacio renovado. Ajustamos hasta que te convenza al 100%.</p>
-      </div>
-      <div class="step reveal" style="transition-delay:.24s">
-        <span class="step-number">04</span>
-        <h3 class="step-title">Compras con criterio</h3>
-        <p class="step-desc">Lista de compra detallada con enlaces, alternativas a distintos presupuestos y guía de montaje.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="proyectos">
-    <div class="section-header reveal">
-      <span class="eyebrow">Trabajo reciente</span>
-      <h2 class="section-title">Proyectos</h2>
-    </div>
-    <div class="projects-grid">
-
-      <div class="project-case reveal">
-        <div class="project-images">
-          <div class="project-img-wrap">
-            <div class="project-placeholder ph-before">
-              <svg class="ph-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3D4F3C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/>
-              </svg>
-              <span class="ph-label">Salón · estado actual</span>
+    <nav>
+        <div class="logo-wrap">
+            <svg width="36" height="44" viewBox="0 0 44 54">
+                <line x1="4" y1="54" x2="4" y2="10" stroke="#E8E4DC" stroke-width="2.8" stroke-linecap="butt"/>
+                <line x1="40" y1="54" x2="40" y2="10" stroke="#E8E4DC" stroke-width="2.8" stroke-linecap="butt"/>
+                <polyline points="4,30 22,10 40,30" fill="none" stroke="#E8E4DC" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+                <div class="logo-name">abitare</div>
+                <div class="logo-tag">Diseño de Interiores</div>
             </div>
-            <span class="img-badge">Antes</span>
-          </div>
-          <div class="project-img-wrap">
-            <div class="project-placeholder ph-after">
-              <svg class="ph-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3D4F3C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/>
-              </svg>
-              <span class="ph-label">Salón · render propuesta</span>
-            </div>
-            <span class="img-badge">Después</span>
-          </div>
         </div>
-        <div class="project-meta">
-          <span class="project-tag">Salón · Madrid</span>
-          <p class="project-name">Salón familiar reconvertido en espacio multifuncional</p>
-        </div>
-      </div>
+        <a class="nav-cta" href="https://wa.me/34642779763?text=Hola%2C%20me%20gustaría%20saber%20más%20sobre%20vuestros%20servicios">Hablemos</a>
+    </nav>
 
-      <div class="project-case reveal">
-        <div class="project-images">
-          <div class="project-img-wrap">
-            <div class="project-placeholder ph-before">
-              <svg class="ph-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3D4F3C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 4h20v14H2z"/><path d="M2 9h20"/>
-              </svg>
-              <span class="ph-label">Dormitorio · estado actual</span>
-            </div>
-            <span class="img-badge">Antes</span>
-          </div>
-          <div class="project-img-wrap">
-            <div class="project-placeholder ph-after">
-              <svg class="ph-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3D4F3C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 4h20v14H2z"/><path d="M2 9h20"/>
-              </svg>
-              <span class="ph-label">Dormitorio · render propuesta</span>
-            </div>
-            <span class="img-badge">Después</span>
-          </div>
-        </div>
-        <div class="project-meta">
-          <span class="project-tag">Dormitorio principal · Barcelona</span>
-          <p class="project-name">Dormitorio con zona de trabajo integrada y aprovechamiento máximo</p>
-        </div>
-      </div>
-
-      <div class="project-case reveal">
-        <div class="project-images">
-          <div class="project-img-wrap">
-            <div class="project-placeholder ph-before">
-              <svg class="ph-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3D4F3C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-              </svg>
-              <span class="ph-label">Piso · estado actual</span>
-            </div>
-            <span class="img-badge">Antes</span>
-          </div>
-          <div class="project-img-wrap">
-            <div class="project-placeholder ph-after">
-              <svg class="ph-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3D4F3C" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-              </svg>
-              <span class="ph-label">Piso · render propuesta</span>
-            </div>
-            <span class="img-badge">Después</span>
-          </div>
-        </div>
-        <div class="project-meta">
-          <span class="project-tag">Piso completo · Valencia</span>
-          <p class="project-name">Renovación integral de piso de inversión para alquiler premium</p>
-        </div>
-      </div>
-
+    <div class="hero">
+        <h1>Tu espacio, <em>reimaginado</em><br>antes de mover nada</h1>
+        <p>Asesoramiento de interiorismo personalizado con visualizaciones reales. Ve cómo quedará tu espacio antes de comprar o reformar.</p>
+        <a class="btn-primary" href="https://wa.me/34642779763?text=Hola%2C%20me%20gustaría%20saber%20más%20sobre%20vuestros%20servicios">Solicitar propuesta</a>
     </div>
-  </section>
 
-  <section id="servicios">
-    <div class="section-header reveal">
-      <span class="eyebrow">Servicios</span>
-      <h2 class="section-title">¿Qué necesitas?</h2>
+    <div class="section">
+        <div class="section-label">Cómo funciona</div>
+        <h2>Un proceso sencillo,<br>un resultado claro</h2>
+        <div class="how-grid">
+            <div class="how-item">
+                <div class="how-num">01</div>
+                <h3>Cuéntame tu espacio</h3>
+                <p>Me envías fotos de la estancia y me explicas qué te gusta, qué no, y tu presupuesto orientativo.</p>
+            </div>
+            <div class="how-item">
+                <div class="how-num">02</div>
+                <h3>Dirección de estilo</h3>
+                <p>Defino la paleta, los materiales y el mobiliario que mejor encajan con tu forma de vivir.</p>
+            </div>
+            <div class="how-item">
+                <div class="how-num">03</div>
+                <h3>Lo ves antes de comprar</h3>
+                <p>Te entrego visualizaciones realistas del espacio transformado junto a los productos seleccionados con enlaces y precios.</p>
+            </div>
+            <div class="how-item">
+                <div class="how-num">04</div>
+                <h3>Compras con criterio</h3>
+                <p>Sin sorpresas. Sin errores de compra. Con la seguridad de saber exactamente a qué espacio estás invirtiendo.</p>
+            </div>
+        </div>
     </div>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <p class="service-name">Estancia</p>
-        <p class="service-price">350€</p>
-        <p class="service-desc">Un espacio: salón, dormitorio, cocina o zona de trabajo. Dirección de estilo, moodboard, renders y lista de compra.</p>
-      </div>
-      <div class="service-card reveal" style="transition-delay:.08s">
-        <p class="service-name">Estancia ampliada</p>
-        <p class="service-price">550€</p>
-        <p class="service-desc">Como el servicio Estancia, con plano de distribución incluido y dos rondas de revisión de renders.</p>
-      </div>
-      <div class="service-card reveal" style="transition-delay:.16s">
-        <p class="service-name">Pack vivienda</p>
-        <p class="service-price">1.400€</p>
-        <p class="service-desc">Vivienda completa de hasta 90 m². Todas las estancias, coordinación de compras y acompañamiento durante la ejecución.</p>
-      </div>
-      <div class="service-card reveal" style="transition-delay:.24s">
-        <p class="service-name">Pack inversor</p>
-        <p class="service-price">900€</p>
-        <p class="service-desc">Para pisos en alquiler. Propuesta orientada a rentabilidad, fotografía para plataformas y presupuesto de reforma.</p>
-      </div>
+
+    <div class="portfolio-section">
+        <div class="portfolio-content">
+            <div class="section-label">Proyectos</div>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:36px;color:var(--h-dark);margin-bottom:40px;">Transformaciones reales</h2>
+
+            <div class="case-block">
+                <div class="case-label">Recibidor · Proyecto real ejecutado</div>
+                <div class="before-after">
+                    <div class="ba-item">
+                        <img src="01_RECIBIDOR_ANTES.jpg" alt="Antes recibidor">
+                        <div class="ba-tag">Antes</div>
+                    </div>
+                    <div class="ba-item">
+                        <img src="01_RECIBIDOR_DESPUES.jpg" alt="Después recibidor">
+                        <div class="ba-tag">Después</div>
+                    </div>
+                </div>
+                <p class="case-desc">Rincón sin identidad transformado en zona de entrada con carácter. Lámpara cilíndrica, cuadro con historia y planta de interior.</p>
+            </div>
+
+            <div class="case-block">
+                <div class="case-label">Terraza · Burriana, Castellón</div>
+                <div class="before-after">
+                    <div class="ba-item">
+                        <img src="01_TERRAZA_ANTES.jpg" alt="Antes terraza">
+                        <div class="ba-tag">Antes</div>
+                    </div>
+                    <div class="ba-item">
+                        <img src="02_TERRAZA_DESPUES.png" alt="Después terraza">
+                        <div class="ba-tag">Después</div>
+                    </div>
+                </div>
+                <p class="case-desc">Terraza funcional convertida en salón exterior. Biombo de cañizo, sofá rinconero en crudo y mesa de centro blanca.</p>
+            </div>
+
+            <div class="case-block">
+                <div class="case-label">Dormitorio principal · Burriana, Castellón</div>
+                <div class="before-after">
+                    <div class="ba-item">
+                        <img src="01_Dormitorio_Burriana_ANTES.jpg" alt="Antes dormitorio">
+                        <div class="ba-tag">Antes</div>
+                    </div>
+                    <div class="ba-item">
+                        <img src="01_Dormitorio_Burriana_despues.jpg" alt="Después dormitorio">
+                        <div class="ba-tag">Después</div>
+                    </div>
+                </div>
+                <p class="case-desc">Dormitorio vacío reorientado al Mediterráneo. Nuevo vestidor con acceso directo, tarima roble, cabecero bouclé y ventanal al mar.</p>
+            </div>
+
+            <div class="case-block">
+                <div class="case-label">Dormitorio matrimonial · En proceso</div>
+                <div class="before-after">
+                    <div class="ba-item">
+                        <img src="01_Dormitorio_MATRIMONIO_antes.jpg" alt="Antes dormitorio matrimonial">
+                        <div class="ba-tag">Antes</div>
+                    </div>
+                    <div class="ba-item">
+                        <img src="01_Dormitorio_MATRIMONIO_despues.png" alt="Después dormitorio matrimonial">
+                        <div class="ba-tag">Después</div>
+                    </div>
+                </div>
+                <p class="case-desc">Habitación actualizada con pintura Jotun Washed Linen, apliques cilíndricos y textil en tonos sage y crema. Cojines florales de acuarela.</p>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <section id="cta-final">
-    <h2 class="cta-title reveal">¿Empezamos?</h2>
-    <p class="cta-sub reveal" style="transition-delay:.1s">Cuéntame cómo es tu espacio y lo que imaginas. Sin compromiso.</p>
-    <a class="btn btn-sage-lg reveal" style="transition-delay:.2s" href="https://wa.me/34642779763?text=Hola%20Ver%C3%B3nica%2C%20me%20gustar%C3%ADa%20que%20me%20ayudes%20con%20mi%20espacio" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
-  </section>
-
-  <footer>
-    <div class="footer-logo-row">
-      <svg width="18" height="22" viewBox="0 0 26 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="0.5" y="13" width="2.8" height="19" fill="#A8C4A6"/>
-        <rect x="22.7" y="13" width="2.8" height="19" fill="#A8C4A6"/>
-        <polyline points="0,14 13,1.5 26,14" stroke="#A8C4A6" stroke-width="2.2" fill="none" stroke-linejoin="miter" stroke-linecap="square"/>
-      </svg>
-      <span class="footer-wordmark">abitare</span>
+    <div class="services-section">
+        <div class="services-content">
+            <div class="section-label">Servicios</div>
+            <h2>¿Qué espacio<br>quieres transformar?</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Estancia</h3>
+                    <div class="service-price">350 € <span>por espacio</span></div>
+                    <p>Dormitorio, salón, terraza o recibidor. Moodboard + selección de productos con enlaces + 2 visualizaciones.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Estancia ampliada</h3>
+                    <div class="service-price">550 € <span>por espacio</span></div>
+                    <p>Salón-comedor o suite de dormitorio. Incluye 3 visualizaciones y una revisión incluida.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Pack Vivienda</h3>
+                    <div class="service-price">1.400 € <span>3–4 estancias</span></div>
+                    <p>Coherencia global de estilo para toda la vivienda. Ideal para reformas o pisos de nueva adquisición.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Pack Inversor</h3>
+                    <div class="service-price">900 € <span>alquiler / venta</span></div>
+                    <p>2–3 estancias clave optimizadas para aumentar el atractivo y el valor percibido del inmueble.</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <p class="footer-copy">Verónica · <a href="https://wa.me/34642779763?text=Hola%20Ver%C3%B3nica%2C%20me%20gustar%C3%ADa%20que%20me%20ayudes%20con%20mi%20espacio" target="_blank" rel="noopener">+34 642 779 763</a></p>
-    <p class="footer-copy">© 2026 Habitare. Diseño de interiores.</p>
-  </footer>
 
-  <script>
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
+    <div class="cta-section">
+        <h2>¿Empezamos?</h2>
+        <p>Cuéntame tu espacio y te preparo una propuesta sin compromiso</p>
+        <a class="btn-primary" href="https://wa.me/34642779763?text=Hola%20Verónica%2C%20me%20gustaría%20que%20me%20ayudes%20con%20mi%20espacio">Escríbeme por WhatsApp</a>
+    </div>
 
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  </script>
+    <footer>
+        <p>© 2026 Habitare · Diseño de Interiores</p>
+        <p>habitaredecor.com</p>
+    </footer>
+
+    <script>
+        // Smooth scroll para navegación interna
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animación de entrada suave
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .hero, .portfolio-section, .services-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
